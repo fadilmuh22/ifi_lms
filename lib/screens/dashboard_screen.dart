@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ifi_lms/util/colors.dart';
+import 'package:ifi_lms/util/custom_icons.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -41,11 +42,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             const SizedBox(height: 22),
-            _crudMenuListTile(context, Icons.person, 'Pengguna', '123 Aktif'),
             _crudMenuListTile(
-                context, Icons.class__outlined, 'Kelas', '12 Terdaftar'),
+                context, CustomIcons.person, 'Pengguna', '123 Aktif'),
             _crudMenuListTile(
-                context, Icons.book_outlined, 'Pengguna', '3 Kategori'),
+                context, CustomIcons.class_icon, 'Kelas', '12 Terdaftar'),
+            _crudMenuListTile(
+                context, CustomIcons.syllabus, 'Syllabus', '3 Kategori'),
           ],
         ),
         const SizedBox(height: 48),
@@ -152,7 +154,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: ElevatedButton(
         onPressed: () {},
         child: Icon(
-          Icons.notifications_outlined,
+          CustomIcons.notification,
           color: Theme.of(context).colorScheme.onBackground,
           size: 24,
         ),
@@ -225,7 +227,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Row(
                 children: [
                   const Icon(
-                    Icons.timer_outlined,
+                    CustomIcons.timer,
                     size: 8,
                   ),
                   const SizedBox(width: 8),
@@ -334,7 +336,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ),
@@ -346,7 +348,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
+                color: Theme.of(context).colorScheme.onPrimary.withOpacity(.5),
               ),
             ),
           ),

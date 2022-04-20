@@ -1,9 +1,15 @@
+import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:ifi_lms/screens/dashboard_screen.dart';
 import 'package:ifi_lms/screens/profile_screen.dart';
 import 'package:ifi_lms/screens/schedule_screen.dart';
+
+import 'package:ifi_lms/util/md2_indicator.dart';
 import 'package:ifi_lms/util/colors.dart';
+import 'package:ifi_lms/util/custom_icons.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -14,6 +20,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Intl.defaultLocale = "id";
+
     return MaterialApp(
       title: 'LMS IFI',
       theme: ThemeData(
@@ -51,15 +59,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme(
           brightness: Brightness.light,
           primary: ColorsUtil.primary,
-          primaryContainer: ColorsUtil.primaryVariant,
+          primaryContainer: ColorsUtil.primaryContainer,
+          inversePrimary: ColorsUtil.inversePrimary,
           secondary: ColorsUtil.secondary,
           tertiary: ColorsUtil.tertiary,
           error: Colors.red,
           surface: ColorsUtil.primary,
           background: ColorsUtil.background,
           onPrimary: Colors.white,
-          onSecondary: Colors.white,
-          onSurface: Colors.white,
+          onSecondary: Colors.black,
+          onSurface: Colors.black,
           onBackground: ColorsUtil.font,
           onError: Colors.red,
         ),
@@ -76,8 +85,16 @@ class HomeBottomNav extends StatefulWidget {
   State<HomeBottomNav> createState() => _HomeBottomNavState();
 }
 
-class _HomeBottomNavState extends State<HomeBottomNav> {
+class _HomeBottomNavState extends State<HomeBottomNav>
+    with TickerProviderStateMixin {
   int _botnavIndex = 0;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
 
   void _onBotnavTapped(int index) {
     setState(() {
@@ -92,9 +109,9 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
       case 1:
         return const ProfileScreen();
       case 2:
-        return const ScheduleScreen();
+        return ScheduleScreen(tabController: _tabController);
       case 3:
-        return const ScheduleScreen();
+        return const Center(child: CircularProgressIndicator());
     }
     return Container();
   }
@@ -102,7 +119,64 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _botnavIndex != 2
+          ? null
+          : AppBar(
+              backgroundColor: const Color(0xFF4c5ebf),
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    CustomIcons.setting_schedule,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+              bottom: TabBar(
+                controller: _tabController,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: const MD2Indicator(
+                  indicatorHeight: 6,
+                  indicatorColor: Colors.white,
+                  indicatorSize: MD2IndicatorSize.full,
+                ),
+                labelStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                unselectedLabelColor: Colors.white.withOpacity(.5),
+                tabs: const [
+                  Tab(text: 'Bulan'),
+                  Tab(text: 'Hari Ini'),
+                ],
+              ),
+            ),
       body: _getNav(),
+      floatingActionButton: _botnavIndex != 2
+          ? null
+          : FloatingActionButton(
+              child: Container(
+                width: 60,
+                height: 60,
+                child: Icon(
+                  Icons.add,
+                  size: 32,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF5769C1),
+                      Color(0xFFAAA3E2),
+                    ],
+                    begin: Alignment(-1, -1),
+                    end: Alignment(1, 1),
+                    tileMode: TileMode.mirror,
+                  ),
+                ),
+              ),
+              onPressed: () {},
+            ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border.all(
@@ -144,19 +218,19 @@ class _HomeBottomNavState extends State<HomeBottomNav> {
             ),
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_rounded),
+                icon: Icon(CustomIcons.home),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
+                icon: Icon(CustomIcons.person),
                 label: 'Profile',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today_rounded),
+                icon: Icon(CustomIcons.calendar),
                 label: 'Jadwal',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.messenger_outline_rounded),
+                icon: Icon(CustomIcons.message),
                 label: 'Pesan',
               ),
             ],

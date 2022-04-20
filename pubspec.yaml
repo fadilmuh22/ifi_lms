@@ -36,6 +36,7 @@ dependencies:
   flutter_riverpod: ^1.0.3
   dio: ^4.0.4
   table_calendar: ^3.0.5
+  syncfusion_flutter_calendar: ^20.1.50
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,9 @@ flutter:
           weight: 600
         - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

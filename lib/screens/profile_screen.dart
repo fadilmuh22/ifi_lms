@@ -340,7 +340,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text(
                         'Unggah File Identitas',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primaryContainer,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
@@ -391,4 +391,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ],
     );
   }
+}
+
+dynamic uploadFile(BuildContext context) {
+  return showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(20),
+      ),
+    ),
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    builder: (context) {
+      return Column(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.photo),
+            title: const Text('Photo'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
