@@ -13,11 +13,13 @@ class _ClassesScreenState extends State<ClassesScreen>
     with SingleTickerProviderStateMixin {
   late FocusNode _searchFieldFocus;
   late TabController _tabController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     _searchFieldFocus = FocusNode();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController =
+        TabController(initialIndex: _selectedIndex, length: 2, vsync: this);
     super.initState();
   }
 
@@ -89,6 +91,12 @@ class _ClassesScreenState extends State<ClassesScreen>
                 ),
                 child: TabBar(
                   controller: _tabController,
+                  onTap: (int index) {
+                    setState(() {
+                      _selectedIndex = index;
+                      _tabController.animateTo(index);
+                    });
+                  },
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(4.0),
                     color: Theme.of(context).colorScheme.primary,
@@ -109,36 +117,40 @@ class _ClassesScreenState extends State<ClassesScreen>
                 ),
               ),
               const SizedBox(height: 24),
-              _getTabViews(_tabController.index),
+              IndexedStack(
+                index: _selectedIndex,
+                children: <Widget>[
+                  Visibility(
+                    child: Column(
+                      children: [
+                        _classListCard(context),
+                        _classListCard(context),
+                        _classListCard(context),
+                      ],
+                    ),
+                    maintainState: true,
+                    visible: _selectedIndex == 0,
+                  ),
+                  Visibility(
+                    child: Column(
+                      children: [
+                        const Text('Batchs'),
+                        _classListCard(context),
+                        _classListCard(context),
+                        _classListCard(context),
+                        _classListCard(context),
+                      ],
+                    ),
+                    maintainState: true,
+                    visible: _selectedIndex == 1,
+                  ),
+                ],
+              ),
             ],
           ),
         ],
       ),
     );
-  }
-
-  Widget _getTabViews(int index) {
-    switch (index) {
-      case 0:
-        return Column(
-          children: [
-            _classListCard(context),
-            _classListCard(context),
-            _classListCard(context),
-          ],
-        );
-      case 1:
-        return Column(
-          children: [
-            const Text('Batchs'),
-            _classListCard(context),
-            _classListCard(context),
-            _classListCard(context),
-          ],
-        );
-      default:
-        return Container();
-    }
   }
 
   Container _classListCard(BuildContext context) {

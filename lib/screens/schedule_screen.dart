@@ -1,3 +1,5 @@
+import 'package:ifi_lms/screens/profile_screen.dart';
+import 'package:ifi_lms/util/custom_icons.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -87,6 +89,389 @@ class SchedulesHari extends StatelessWidget {
       },
     );
   }
+}
+
+dynamic createJadwalBottomSheet(BuildContext context) {
+  return showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(12),
+      ),
+    ),
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    isDismissible: false,
+    isScrollControlled: true,
+    builder: (context) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 42),
+        child: DefaultTabController(
+          length: 2,
+          initialIndex: 0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                height: 32,
+                width: 169,
+                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFDAE2FF),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: TabBar(
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.0),
+                    color: Colors.white,
+                  ),
+                  labelColor: Theme.of(context).colorScheme.primary,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  unselectedLabelColor:
+                      Theme.of(context).colorScheme.onBackground,
+                  tabs: const [
+                    Tab(
+                      text: 'Jadwal',
+                    ),
+                    Tab(
+                      text: 'Acara',
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2 -
+                                  3 -
+                                  24,
+                              height: 80,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Mulai',
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      hintText: '1/9/70',
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          CustomIcons.calendar,
+                                          size: 20,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2 -
+                                  3 -
+                                  24,
+                              height: 80,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Berakhir',
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      hintText: '1/1/1970',
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          CustomIcons.calendar,
+                                          size: 20,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 23,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ColorsUtil.gray,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  focusColor: ColorsUtil.gray,
+                                  hint: Text(
+                                    'Pilih Material',
+                                    style: TextStyle(
+                                      color: ColorsUtil.font.withOpacity(.5),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  items: <String>['A', 'B', 'C', 'D']
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (_) {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 23,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ColorsUtil.gray,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  focusColor: ColorsUtil.gray,
+                                  hint: Text(
+                                    'Pilih Batch',
+                                    style: TextStyle(
+                                      color: ColorsUtil.font.withOpacity(.5),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  items: <String>['A', 'B', 'C', 'D']
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (_) {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 23,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ColorsUtil.gray,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  focusColor: ColorsUtil.gray,
+                                  hint: Text(
+                                    'Pilih Kelas',
+                                    style: TextStyle(
+                                      color: ColorsUtil.font.withOpacity(.5),
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  items: <String>['A', 'B', 'C', 'D']
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (_) {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 42),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            cancelButton(context),
+                            const SizedBox(width: 12),
+                            submitButton(context),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Nama',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              const SizedBox(height: 4),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: 'Nama Acara',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Deskripsi',
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              const SizedBox(height: 4),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: 'Deskripsi Acara',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2 -
+                                  3 -
+                                  24,
+                              height: 80,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Mulai',
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      hintText: '1/9/70',
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          CustomIcons.calendar,
+                                          size: 20,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2 -
+                                  3 -
+                                  24,
+                              height: 80,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Berakhir',
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      hintText: '1/1/1970',
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          CustomIcons.calendar,
+                                          size: 20,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 42),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            cancelButton(context),
+                            const SizedBox(width: 12),
+                            submitButton(context),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
 
 Widget _jadwalBulanListTile(

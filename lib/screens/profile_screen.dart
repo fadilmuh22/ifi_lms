@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ifi_lms/util/colors.dart';
+import 'package:ifi_lms/util/custom_icons.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -9,8 +10,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  int _radioValue1 = -1;
+
   bool _passwordVisible = false;
-  final _passwordController = TextEditingController();
+  late final _passwordController = TextEditingController();
+
+  void _handleRadioValueChange1(int? value) {
+    setState(() {
+      _radioValue1 = value!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -125,6 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
@@ -181,14 +192,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // Here is key idea
                         suffixIcon: IconButton(
                           icon: Icon(
-                            // Based on passwordVisible state choose the icon
                             _passwordVisible
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                             color: Theme.of(context).colorScheme.onBackground,
                           ),
                           onPressed: () {
-                            // Update the state i.e. toogle the state of passwordVisible variable
                             setState(() {
                               _passwordVisible = !_passwordVisible;
                             });
@@ -275,11 +284,74 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         const SizedBox(height: 4),
                         TextFormField(
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             hintText: '1/1/1970',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                CustomIcons.calendar,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
+                              onPressed: () {},
+                            ),
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Gender',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Radio(
+                    value: 0,
+                    groupValue: _radioValue1,
+                    activeColor: Theme.of(context).colorScheme.primary,
+                    onChanged: _handleRadioValueChange1,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: const VisualDensity(
+                      horizontal: VisualDensity.minimumDensity,
+                      vertical: VisualDensity.minimumDensity,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Laki-Laki',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Radio(
+                    value: 1,
+                    groupValue: _radioValue1,
+                    onChanged: _handleRadioValueChange1,
+                    activeColor: Theme.of(context).colorScheme.primary,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: const VisualDensity(
+                      horizontal: VisualDensity.minimumDensity,
+                      vertical: VisualDensity.minimumDensity,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Perempuan',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                 ],
@@ -337,7 +409,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        uploadFile(context);
+                        uploadFileBottomSheet(context);
                       },
                       child: Text(
                         'Unggah File Identitas',
@@ -361,7 +433,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  _submitButton(context),
+                  submitButton(context),
                 ],
               ),
             ],
@@ -373,57 +445,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-dynamic uploadFile(BuildContext context) {
+dynamic uploadFileBottomSheet(BuildContext context) {
   return showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20),
+        top: Radius.circular(12),
       ),
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
+    isDismissible: false,
     builder: (context) {
-      return Container(
-        child: Column(
-          children: [
-            _uploadFileCard(context),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Cancel'),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 24,
-                    ),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    primary: ColorsUtil.gray,
-                    textStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(.5),
-                    ),
-                  ),
+      return SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 42),
+          child: Column(
+            children: [
+              const SizedBox(height: 42),
+              Text(
+                'Upload File',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
                 ),
-                _submitButton(context),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(height: 32),
+              _uploadFileCard(context),
+              _uploadFileCard(context),
+              _uploadFileCard(context),
+              const SizedBox(height: 42),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  cancelButton(context),
+                  const SizedBox(width: 12),
+                  submitButton(context),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     },
   );
 }
 
-ElevatedButton _submitButton(BuildContext context) {
+ElevatedButton cancelButton(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.pop(context);
+    },
+    child: Text(
+      'Cancel',
+      style: TextStyle(
+        color: ColorsUtil.font,
+      ),
+    ),
+    style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: 24,
+      ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      primary: ColorsUtil.gray,
+      textStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: ColorsUtil.font,
+      ),
+    ),
+  );
+}
+
+ElevatedButton submitButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () {},
     child: const Text('Submit'),
@@ -440,86 +539,98 @@ ElevatedButton _submitButton(BuildContext context) {
       textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
-        color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
+        color: Theme.of(context).colorScheme.onPrimary,
       ),
     ),
   );
 }
 
-Column _uploadFileCard(BuildContext context) {
-  return Column(
-    children: [
-      Text(
-        'Admin IFI',
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.onBackground,
+Widget _uploadFileCard(BuildContext context) {
+  return Container(
+    margin: const EdgeInsets.only(bottom: 20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Admin IFI',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
         ),
-      ),
-      const SizedBox(height: 12),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 12),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF777777).withOpacity(.25),
-              offset: const Offset(0, 1),
-              blurRadius: 4,
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(28),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 12),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.inversePrimary,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF777777).withOpacity(.25),
+                offset: const Offset(0, 1),
+                blurRadius: 4,
               ),
-              child: Icon(
-                Icons.photo,
-                size: 24,
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-            ),
-            const SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Photo',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(28),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(
+                      Icons.photo,
+                      size: 24,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withOpacity(.5),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Container(),
-              ],
-            ),
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(8),
+                  const SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Photo',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Container(),
+                    ],
+                  ),
+                ],
               ),
-              child: IconButton(
-                constraints: const BoxConstraints(),
-                icon: Icon(
-                  Icons.upload_outlined,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  size: 24,
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                onPressed: () {},
+                child: IconButton(
+                  constraints: const BoxConstraints(),
+                  icon: Icon(
+                    Icons.upload_outlined,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    size: 24,
+                  ),
+                  onPressed: () {},
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }
