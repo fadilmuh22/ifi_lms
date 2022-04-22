@@ -230,6 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: DropdownButton<String>(
                         isExpanded: true,
                         focusColor: ColorsUtil.gray,
+                        underline: Container(),
                         hint: Text(
                           'Roles',
                           style: TextStyle(

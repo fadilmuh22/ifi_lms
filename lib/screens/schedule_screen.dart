@@ -166,6 +166,7 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   TextFormField(
                                     decoration: InputDecoration(
                                       hintText: '1/9/70',
+                                      fillColor: ColorsUtil.secondary,
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           CustomIcons.calendar,
@@ -199,6 +200,7 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   TextFormField(
                                     decoration: InputDecoration(
                                       hintText: '1/1/1970',
+                                      fillColor: ColorsUtil.secondary,
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           CustomIcons.calendar,
@@ -228,12 +230,13 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: ColorsUtil.gray,
+                                  color: ColorsUtil.secondary,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: DropdownButton<String>(
                                   isExpanded: true,
                                   focusColor: ColorsUtil.gray,
+                                  underline: Container(),
                                   hint: Text(
                                     'Pilih Material',
                                     style: TextStyle(
@@ -267,12 +270,13 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: ColorsUtil.gray,
+                                  color: ColorsUtil.secondary,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: DropdownButton<String>(
                                   isExpanded: true,
                                   focusColor: ColorsUtil.gray,
+                                  underline: Container(),
                                   hint: Text(
                                     'Pilih Batch',
                                     style: TextStyle(
@@ -306,12 +310,13 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: ColorsUtil.gray,
+                                  color: ColorsUtil.secondary,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: DropdownButton<String>(
                                   isExpanded: true,
                                   focusColor: ColorsUtil.gray,
+                                  underline: Container(),
                                   hint: Text(
                                     'Pilih Kelas',
                                     style: TextStyle(
@@ -358,8 +363,9 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                               ),
                               const SizedBox(height: 4),
                               TextFormField(
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: 'Nama Acara',
+                                  fillColor: ColorsUtil.secondary,
                                 ),
                               ),
                             ],
@@ -376,8 +382,9 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                               ),
                               const SizedBox(height: 4),
                               TextFormField(
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: 'Deskripsi Acara',
+                                  fillColor: ColorsUtil.secondary,
                                 ),
                               ),
                             ],
@@ -402,6 +409,7 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   TextFormField(
                                     decoration: InputDecoration(
                                       hintText: '1/9/70',
+                                      fillColor: ColorsUtil.secondary,
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           CustomIcons.calendar,
@@ -435,6 +443,7 @@ dynamic createJadwalBottomSheet(BuildContext context) {
                                   TextFormField(
                                     decoration: InputDecoration(
                                       hintText: '1/1/1970',
+                                      fillColor: ColorsUtil.secondary,
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           CustomIcons.calendar,
