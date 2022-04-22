@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ifi_lms/screens/classes_screen.dart';
+import 'package:ifi_lms/screens/users_screen.dart';
 import 'package:ifi_lms/util/colors.dart';
 import 'package:ifi_lms/util/custom_icons.dart';
 
@@ -43,11 +45,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             const SizedBox(height: 22),
             _crudMenuListTile(
-                context, CustomIcons.person, 'Pengguna', '123 Aktif'),
+                context, CustomIcons.person, 'Pengguna', '123 Aktif', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UsersScreen()),
+              );
+            }),
             _crudMenuListTile(
-                context, CustomIcons.class_icon, 'Kelas', '12 Terdaftar'),
+                context, CustomIcons.class_icon, 'Kelas', '12 Terdaftar', () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ClassesScreen()),
+              );
+            }),
             _crudMenuListTile(
-                context, CustomIcons.syllabus, 'Syllabus', '3 Kategori'),
+                context, CustomIcons.syllabus, 'Syllabus', '3 Kategori', () {}),
           ],
         ),
         const SizedBox(height: 48),
@@ -55,8 +67,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Container _crudMenuListTile(
-      BuildContext context, IconData iconTile, String title, String stats) {
+  Container _crudMenuListTile(BuildContext context, IconData iconTile,
+      String title, String stats, void Function()? onPressed) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(vertical: 17.0, horizontal: 23),
@@ -125,7 +137,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             width: 40,
             height: 20,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onPressed,
               child: const Text('Lihat'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -201,104 +213,114 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Container _checkinCard(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: const Color(0xFFE7F1E8),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Check in',
-                style: TextStyle(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onBackground
-                      .withOpacity(.86),
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(width: 4),
-              Row(
-                children: [
-                  const Icon(
-                    CustomIcons.timer,
-                    size: 8,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    '07:12:25',
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onBackground
-                          .withOpacity(.5),
-                      fontSize: 8,
-                      fontWeight: FontWeight.w600,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(12),
+          splashColor: ColorsUtil.font.withOpacity(.5),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Check in',
+                      style: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onBackground
+                            .withOpacity(.86),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.more_horiz,
-                    size: 20,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onBackground
-                        .withOpacity(.5),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 32,
-                    color: Colors.transparent,
-                    child: Stack(
-                      children: const <Widget>[
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: CircleAvatar(
-                              radius: 14,
-                            ),
-                          ),
+                    const SizedBox(width: 4),
+                    Row(
+                      children: [
+                        const Icon(
+                          CustomIcons.timer,
+                          size: 8,
                         ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: CircleAvatar(
-                              radius: 14,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: CircleAvatar(
-                              radius: 14,
-                            ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '07:12:25',
+                          style: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onBackground
+                                .withOpacity(.5),
+                            fontSize: 8,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.more_horiz,
+                          size: 20,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(.5),
+                        ),
+                        Container(
+                          width: 80,
+                          height: 32,
+                          color: Colors.transparent,
+                          child: Stack(
+                            children: const <Widget>[
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: CircleAvatar(
+                                    radius: 14,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: CircleAvatar(
+                                    radius: 14,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: CircleAvatar(
+                                    radius: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }

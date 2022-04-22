@@ -173,6 +173,13 @@ class _HomeBottomNavState extends State<HomeBottomNav>
                     end: Alignment(1, 1),
                     tileMode: TileMode.mirror,
                   ),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     blurRadius: 3,
+                  //     spreadRadius: 1,
+                  //     color: const Color(0xFF4F4E4E).withOpacity(.25),
+                  //   ),
+                  // ],
                 ),
               ),
               onPressed: () {},

@@ -237,7 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }).toList(),
                         onChanged: (_) {},
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -403,16 +403,18 @@ dynamic uploadFile(BuildContext context) {
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     builder: (context) {
-      return Column(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.photo),
-            title: const Text('Photo'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
+      return Container(
+        child: Column(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo),
+              title: const Text('Photo'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       );
     },
   );
