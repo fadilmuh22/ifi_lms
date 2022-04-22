@@ -456,6 +456,7 @@ dynamic uploadFileBottomSheet(BuildContext context) {
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     isDismissible: false,
+    isScrollControlled: true,
     builder: (context) {
       return SingleChildScrollView(
         child: Container(
