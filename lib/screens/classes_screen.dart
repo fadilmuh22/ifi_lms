@@ -11,11 +11,12 @@ class ClassesScreen extends StatefulWidget {
 
 class _ClassesScreenState extends State<ClassesScreen>
     with SingleTickerProviderStateMixin {
-  final FocusNode _searchFieldFocus = FocusNode();
+  late FocusNode _searchFieldFocus;
   late TabController _tabController;
 
   @override
   void initState() {
+    _searchFieldFocus = FocusNode();
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -108,30 +109,36 @@ class _ClassesScreenState extends State<ClassesScreen>
                 ),
               ),
               const SizedBox(height: 24),
-              [
-                Column(
-                  children: [
-                    _classListCard(context),
-                    _classListCard(context),
-                    _classListCard(context),
-                  ],
-                ),
-
-                // second tab bar view widget
-                Column(
-                  children: [
-                    const Text('Batchs'),
-                    _classListCard(context),
-                    _classListCard(context),
-                    _classListCard(context),
-                  ],
-                ),
-              ][_tabController.index],
+              _getTabViews(_tabController.index),
             ],
           ),
         ],
       ),
     );
+  }
+
+  Widget _getTabViews(int index) {
+    switch (index) {
+      case 0:
+        return Column(
+          children: [
+            _classListCard(context),
+            _classListCard(context),
+            _classListCard(context),
+          ],
+        );
+      case 1:
+        return Column(
+          children: [
+            const Text('Batchs'),
+            _classListCard(context),
+            _classListCard(context),
+            _classListCard(context),
+          ],
+        );
+      default:
+        return Container();
+    }
   }
 
   Container _classListCard(BuildContext context) {

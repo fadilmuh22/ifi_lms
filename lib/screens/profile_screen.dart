@@ -336,7 +336,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 4),
                   Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        uploadFile(context);
+                      },
                       child: Text(
                         'Unggah File Identitas',
                         style: TextStyle(
@@ -359,29 +361,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Submit'),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 24,
-                      ),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      primary: Theme.of(context).colorScheme.primary,
-                      textStyle: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(.5),
-                      ),
-                    ),
-                  ),
+                  _submitButton(context),
                 ],
               ),
             ],
@@ -406,16 +386,140 @@ dynamic uploadFile(BuildContext context) {
       return Container(
         child: Column(
           children: [
-            ListTile(
-              leading: const Icon(Icons.photo),
-              title: const Text('Photo'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+            _uploadFileCard(context),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Cancel'),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 24,
+                    ),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    primary: ColorsUtil.gray,
+                    textStyle: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(.5),
+                    ),
+                  ),
+                ),
+                _submitButton(context),
+              ],
             ),
           ],
         ),
       );
     },
+  );
+}
+
+ElevatedButton _submitButton(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () {},
+    child: const Text('Submit'),
+    style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 12,
+        horizontal: 24,
+      ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      primary: Theme.of(context).colorScheme.primary,
+      textStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
+      ),
+    ),
+  );
+}
+
+Column _uploadFileCard(BuildContext context) {
+  return Column(
+    children: [
+      Text(
+        'Admin IFI',
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
+      ),
+      const SizedBox(height: 12),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 12),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF777777).withOpacity(.25),
+              offset: const Offset(0, 1),
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(28),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                Icons.photo,
+                size: 24,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Photo',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Container(),
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: IconButton(
+                constraints: const BoxConstraints(),
+                icon: Icon(
+                  Icons.upload_outlined,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  size: 24,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
   );
 }
