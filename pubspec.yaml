@@ -38,7 +38,6 @@ dependencies:
   table_calendar: ^3.0.5
   syncfusion_flutter_calendar: ^20.1.50
   flutter_slidable: ^1.2.0
-  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

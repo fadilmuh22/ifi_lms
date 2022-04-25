@@ -25,17 +25,15 @@ class ScheduleScreen extends ConsumerWidget {
       controller: tabController,
       children: [
         ScheduleCalendar(UniqueKey()),
-        SchedulesBulan(listSchedule: scheduleData),
-        // SchedulesHari(listSchedule: scheduleData)
+        SchedulesList(listSchedule: scheduleData),
       ],
     );
   }
 }
 
-class SchedulesBulan extends StatelessWidget {
+class SchedulesList extends StatelessWidget {
   final List<ScheduleModel> listSchedule;
-  const SchedulesBulan({Key? key, required this.listSchedule})
-      : super(key: key);
+  const SchedulesList({Key? key, required this.listSchedule}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +54,10 @@ class SchedulesBulan extends StatelessWidget {
   }
 }
 
-class SchedulesHari extends StatelessWidget {
+class SchedulesListApi extends StatelessWidget {
   final List<ScheduleModel> listSchedule;
-  const SchedulesHari({Key? key, required this.listSchedule}) : super(key: key);
+  const SchedulesListApi({Key? key, required this.listSchedule})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
