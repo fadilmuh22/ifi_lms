@@ -6,25 +6,25 @@ ElevatedButton cancelButton(BuildContext context) {
     onPressed: () {
       Navigator.pop(context);
     },
-    child: Text(
-      'Cancel',
-      style: TextStyle(
-        color: ColorsUtil.font,
-      ),
-    ),
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
+      backgroundColor: ColorsUtil.gray,
       padding: const EdgeInsets.symmetric(
         vertical: 12,
         horizontal: 24,
       ),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      primary: ColorsUtil.gray,
       textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
+        color: ColorsUtil.font,
+      ),
+    ),
+    child: Text(
+      'Cancel',
+      style: TextStyle(
         color: ColorsUtil.font,
       ),
     ),
@@ -34,22 +34,22 @@ ElevatedButton cancelButton(BuildContext context) {
 ElevatedButton submitButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () {},
-    child: const Text('Submit'),
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.symmetric(
         vertical: 12,
         horizontal: 24,
       ),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      primary: Theme.of(context).colorScheme.primary,
       textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
         color: Theme.of(context).colorScheme.onPrimary,
       ),
     ),
+    child: const Text('Submit'),
   );
 }

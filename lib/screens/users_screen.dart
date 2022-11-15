@@ -75,11 +75,6 @@ class _UsersScreenState extends State<UsersScreen> {
                         child: Container(
                           width: 40,
                           height: 40,
-                          child: Icon(
-                            Icons.add,
-                            size: 24,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             gradient: LinearGradient(
@@ -91,6 +86,11 @@ class _UsersScreenState extends State<UsersScreen> {
                               end: Alignment(1, 1),
                               tileMode: TileMode.mirror,
                             ),
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            size: 24,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                       ),

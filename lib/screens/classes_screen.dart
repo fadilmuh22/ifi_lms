@@ -42,7 +42,7 @@ class _ClassesScreenState extends State<ClassesScreen>
               IconButton(
                 constraints: const BoxConstraints(),
                 icon: Icon(
-                  CustomIcons.setting_schedule,
+                  CustomIcons.settingSchedule,
                   color: Theme.of(context).colorScheme.primary,
                   size: 24,
                 ),
@@ -121,6 +121,8 @@ class _ClassesScreenState extends State<ClassesScreen>
                 index: _selectedIndex,
                 children: <Widget>[
                   Visibility(
+                    maintainState: true,
+                    visible: _selectedIndex == 0,
                     child: Column(
                       children: [
                         _classListCard(context),
@@ -128,10 +130,10 @@ class _ClassesScreenState extends State<ClassesScreen>
                         _classListCard(context),
                       ],
                     ),
-                    maintainState: true,
-                    visible: _selectedIndex == 0,
                   ),
                   Visibility(
+                    maintainState: true,
+                    visible: _selectedIndex == 1,
                     child: Column(
                       children: [
                         const Text('Batchs'),
@@ -141,8 +143,6 @@ class _ClassesScreenState extends State<ClassesScreen>
                         _classListCard(context),
                       ],
                     ),
-                    maintainState: true,
-                    visible: _selectedIndex == 1,
                   ),
                 ],
               ),

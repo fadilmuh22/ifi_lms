@@ -29,11 +29,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: ColorsUtil.background,
         textTheme: TextTheme(
-            labelMedium: TextStyle(
-          color: ColorsUtil.font,
-          fontSize: 12.0,
-          fontWeight: FontWeight.w600,
-        )),
+          labelMedium: TextStyle(
+            color: ColorsUtil.font,
+            fontSize: 12.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         inputDecorationTheme: InputDecorationTheme(
           alignLabelWithHint: false,
           floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -126,7 +127,7 @@ class _HomeBottomNavState extends State<HomeBottomNav>
               actions: [
                 IconButton(
                   icon: const Icon(
-                    CustomIcons.setting_schedule,
+                    CustomIcons.settingSchedule,
                   ),
                   onPressed: () {},
                 ),
@@ -157,11 +158,6 @@ class _HomeBottomNavState extends State<HomeBottomNav>
               child: Container(
                 width: 60,
                 height: 60,
-                child: Icon(
-                  Icons.add,
-                  size: 32,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
@@ -173,6 +169,11 @@ class _HomeBottomNavState extends State<HomeBottomNav>
                     end: Alignment(1, 1),
                     tileMode: TileMode.mirror,
                   ),
+                ),
+                child: Icon(
+                  Icons.add,
+                  size: 32,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               onPressed: () {

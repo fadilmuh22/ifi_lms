@@ -113,13 +113,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 24,
               child: ElevatedButton(
                 onPressed: () {},
-                child: const Text('Edit'),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(21),
                   ),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   padding: const EdgeInsets.symmetric(vertical: 5),
-                  primary: Theme.of(context).colorScheme.primary,
                   textStyle: TextStyle(
                     fontSize: 8,
                     fontWeight: FontWeight.bold,
@@ -127,6 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Theme.of(context).colorScheme.onSurface.withOpacity(.5),
                   ),
                 ),
+                child: const Text('Edit'),
               ),
             )
           ],
@@ -412,6 +412,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {
                         uploadFileBottomSheet(context);
                       },
+                      style: TextButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
                       child: Text(
                         'Unggah File Identitas',
                         style: TextStyle(
@@ -420,11 +425,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
                         ),
-                      ),
-                      style: TextButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                     ),
                   )
@@ -474,9 +474,9 @@ dynamic uploadFileBottomSheet(BuildContext context) {
                 ),
               ),
               const SizedBox(height: 32),
-              _uploadFileCard(context),
-              _uploadFileCard(context),
-              _uploadFileCard(context),
+              _uploadFileCard(context, 'KTP'),
+              _uploadFileCard(context, 'NPWP'),
+              _uploadFileCard(context, 'Kartu Keluarga'),
               const SizedBox(height: 42),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -499,25 +499,25 @@ ElevatedButton cancelButton(BuildContext context) {
     onPressed: () {
       Navigator.pop(context);
     },
-    child: Text(
-      'Cancel',
-      style: TextStyle(
-        color: ColorsUtil.font,
-      ),
-    ),
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
+      backgroundColor: ColorsUtil.gray,
       padding: const EdgeInsets.symmetric(
         vertical: 12,
         horizontal: 24,
       ),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      primary: ColorsUtil.gray,
       textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
+        color: ColorsUtil.font,
+      ),
+    ),
+    child: Text(
+      'Cancel',
+      style: TextStyle(
         color: ColorsUtil.font,
       ),
     ),
@@ -527,34 +527,34 @@ ElevatedButton cancelButton(BuildContext context) {
 ElevatedButton submitButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () {},
-    child: const Text('Submit'),
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       padding: const EdgeInsets.symmetric(
         vertical: 12,
         horizontal: 24,
       ),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      primary: Theme.of(context).colorScheme.primary,
       textStyle: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
         color: Theme.of(context).colorScheme.onPrimary,
       ),
     ),
+    child: const Text('Submit'),
   );
 }
 
-Widget _uploadFileCard(BuildContext context) {
+Widget _uploadFileCard(BuildContext context, String fileTitle) {
   return Container(
     margin: const EdgeInsets.only(bottom: 20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Admin IFI',
+          fileTitle,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -565,7 +565,7 @@ Widget _uploadFileCard(BuildContext context) {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 12),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.inversePrimary,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
@@ -600,7 +600,7 @@ Widget _uploadFileCard(BuildContext context) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Photo',
+                        'Tidak ada file',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onBackground,
                           fontSize: 12,

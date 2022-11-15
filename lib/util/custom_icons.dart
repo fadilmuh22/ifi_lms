@@ -23,7 +23,7 @@ class CustomIcons {
 
   static const IconData calendar =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData class_icon =
+  static const IconData classIcon =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData edit =
       IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -35,9 +35,9 @@ class CustomIcons {
       IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData person =
       IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData setting_alt =
+  static const IconData settingAlt =
       IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData setting_schedule =
+  static const IconData settingSchedule =
       IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData timer =
       IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);

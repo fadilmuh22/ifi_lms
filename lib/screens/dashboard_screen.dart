@@ -52,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               );
             }),
             _crudMenuListTile(
-                context, CustomIcons.class_icon, 'Kelas', '12 Terdaftar', () {
+                context, CustomIcons.classIcon, 'Kelas', '12 Terdaftar', () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ClassesScreen()),
@@ -138,13 +138,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             height: 20,
             child: ElevatedButton(
               onPressed: onPressed,
-              child: const Text('Lihat'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(21),
                 ),
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-                primary: Theme.of(context).colorScheme.primary,
                 textStyle: TextStyle(
                   fontSize: 8,
                   fontWeight: FontWeight.bold,
@@ -152,6 +151,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Theme.of(context).colorScheme.onSurface.withOpacity(.5),
                 ),
               ),
+              child: const Text('Lihat'),
             ),
           )
         ],
@@ -165,16 +165,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
       height: 36,
       child: ElevatedButton(
         onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(6),
+        ),
         child: Icon(
           CustomIcons.notification,
           color: Theme.of(context).colorScheme.onBackground,
           size: 24,
-        ),
-        style: ElevatedButton.styleFrom(
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(6),
-          primary: Theme.of(context).colorScheme.background,
-          onPrimary: Theme.of(context).colorScheme.onSurface,
         ),
       ),
     );
@@ -379,24 +379,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
             height: 32,
             child: ElevatedButton(
               onPressed: () {},
-              child: const Text(
-                'Periksa',
-              ),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
                 padding: const EdgeInsets.symmetric(
                   vertical: 9,
                   horizontal: 29,
                 ),
-                primary: Theme.of(context).colorScheme.tertiary,
                 textStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(.5),
                 ),
+              ),
+              child: const Text(
+                'Periksa',
               ),
             ),
           ),
